@@ -127,23 +127,24 @@ void draw_main_car(){
 void draw_opp(){
     glColor3f(0.000, 0.000, 0.000);
     glBegin(GL_POLYGON);
-    glVertex2f(lrIndex1 + 26 - 2, car1 + 100 - 4);
-    glVertex2f(lrIndex1 + 26 - 2, car1 + 100 - 6);
-    glVertex2f(lrIndex1 + 30 + 2, car1 + 100 - 6);
-    glVertex2f(lrIndex1 + 30 + 2, car1 + 100 - 4);
+    glVertex2f(lrIndex1 + 27 - 2, car1 + 100 - 4);
+    glVertex2f(lrIndex1 + 27 - 2, car1 + 100 - 6);
+    glVertex2f(lrIndex1 + 29 + 2, car1 + 100 - 6);
+    glVertex2f(lrIndex1 + 29 + 2, car1 + 100 - 4);
     glEnd();
     glColor3f(0.000, 0.000, 0.000);
     glBegin(GL_POLYGON);
-    glVertex2f(lrIndex1 + 26 - 2, car1 + 100);
-    glVertex2f(lrIndex1 + 26 - 2, car1 + 100 - 2);
-    glVertex2f(lrIndex1 + 30 + 2, car1 + 100 - 2);
-    glVertex2f(lrIndex1 + 30 + 2, car1 + 100);
+    glVertex2f(lrIndex1 + 27 - 2, car1 + 100);
+    glVertex2f(lrIndex1 + 27 - 2, car1 + 100 - 2);
+    glVertex2f(lrIndex1 + 29 + 2, car1 + 100 - 2);
+    glVertex2f(lrIndex1 + 29 + 2, car1 + 100);
     glEnd();
     glColor3f(1.000, 0.000, 0.000);
     glBegin(GL_POLYGON);
     glVertex2f(lrIndex1 + 26, car1 + 100);
     glVertex2f(lrIndex1 + 26, car1 + 100 - 7);
-    glVertex2f(lrIndex1 + 28, car1 + 100 - 9);
+    glVertex2f(lrIndex1 + 27, car1 + 100 - 9);
+    glVertex2f(lrIndex1 + 29, car1 + 100 - 9);
     glVertex2f(lrIndex1 + 30, car1 + 100 - 7);
     glVertex2f(lrIndex1 + 30, car1 + 100);
     glEnd();
@@ -154,7 +155,7 @@ void draw_opp(){
         lrIndex1 = lrIndex;
     }
     // KIll check car1
-    if ((abs(lrIndex - lrIndex1) < 8) && (car1 + 100 < 10))
+    if ((abs(lrIndex - lrIndex1) < 6) && (car1 + 100 < 10))
     {
         start = 0;
         gv = 1;
@@ -162,23 +163,24 @@ void draw_opp(){
     // Opposite car 2
     glColor3f(0.000, 0.000, 0.000);
     glBegin(GL_POLYGON);
-    glVertex2f(lrIndex2 + 26 - 2, car2 + 100 - 4);
-    glVertex2f(lrIndex2 + 26 - 2, car2 + 100 - 6);
-    glVertex2f(lrIndex2 + 30 + 2, car2 + 100 - 6);
-    glVertex2f(lrIndex2 + 30 + 2, car2 + 100 - 4);
+    glVertex2f(lrIndex2 + 27 - 2, car2 + 100 - 4);
+    glVertex2f(lrIndex2 + 27 - 2, car2 + 100 - 6);
+    glVertex2f(lrIndex2 + 29 + 2, car2 + 100 - 6);
+    glVertex2f(lrIndex2 + 29 + 2, car2 + 100 - 4);
     glEnd();
     glColor3f(0.000, 0.000, 0.000);
     glBegin(GL_POLYGON);
-    glVertex2f(lrIndex2 + 26 - 2, car2 + 100);
-    glVertex2f(lrIndex2 + 26 - 2, car2 + 100 - 2);
-    glVertex2f(lrIndex2 + 30 + 2, car2 + 100 - 2);
-    glVertex2f(lrIndex2 + 30 + 2, car2 + 100);
+    glVertex2f(lrIndex2 + 27 - 2, car2 + 100);
+    glVertex2f(lrIndex2 + 27 - 2, car2 + 100 - 2);
+    glVertex2f(lrIndex2 + 29 + 2, car2 + 100 - 2);
+    glVertex2f(lrIndex2 + 29 + 2, car2 + 100);
     glEnd();
     glColor3f(0.294, 0.000, 0.510);
     glBegin(GL_POLYGON);
     glVertex2f(lrIndex2 + 26, car2 + 100);
     glVertex2f(lrIndex2 + 26, car2 + 100 - 7);
-    glVertex2f(lrIndex2 + 28, car2 + 100 - 9);
+    glVertex2f(lrIndex2 + 27, car2 + 100 - 9);
+    glVertex2f(lrIndex2 + 29, car2 + 100 - 9);
     glVertex2f(lrIndex2 + 30, car2 + 100 - 7);
     glVertex2f(lrIndex2 + 30, car2 + 100);
     glEnd();
@@ -189,7 +191,7 @@ void draw_opp(){
         lrIndex2 = lrIndex;
     }
     // KIll check car2
-    if ((abs(lrIndex - lrIndex2) < 8) && (car2 + 100 < 10))
+    if ((abs(lrIndex - lrIndex2) < 6) && (car2 + 100 < 10))
     {
         start = 0;
         gv = 1;
@@ -197,23 +199,24 @@ void draw_opp(){
     // Opposite car 3
     glColor3f(0.000, 0.000, 0.000);
     glBegin(GL_POLYGON);
-    glVertex2f(lrIndex3 + 26 - 2, car3 + 100 - 4);
-    glVertex2f(lrIndex3 + 26 - 2, car3 + 100 - 6);
-    glVertex2f(lrIndex3 + 30 + 2, car3 + 100 - 6);
-    glVertex2f(lrIndex3 + 30 + 2, car3 + 100 - 4);
+    glVertex2f(lrIndex3 + 27 - 2, car3 + 100 - 4);
+    glVertex2f(lrIndex3 + 27 - 2, car3 + 100 - 6);
+    glVertex2f(lrIndex3 + 29 + 2, car3 + 100 - 6);
+    glVertex2f(lrIndex3 + 29 + 2, car3 + 100 - 4);
     glEnd();
     glColor3f(0.000, 0.000, 0.000);
     glBegin(GL_POLYGON);
-    glVertex2f(lrIndex3 + 26 - 2, car3 + 100);
-    glVertex2f(lrIndex3 + 26 - 2, car3 + 100 - 2);
-    glVertex2f(lrIndex3 + 30 + 2, car3 + 100 - 2);
-    glVertex2f(lrIndex3 + 30 + 2, car3 + 100);
+    glVertex2f(lrIndex3 + 27 - 2, car3 + 100);
+    glVertex2f(lrIndex3 + 27 - 2, car3 + 100 - 2);
+    glVertex2f(lrIndex3 + 29 + 2, car3 + 100 - 2);
+    glVertex2f(lrIndex3 + 29 + 2, car3 + 100);
     glEnd();
     glColor3f(1.000, 0.271, 0.000);
     glBegin(GL_POLYGON);
     glVertex2f(lrIndex3 + 26, car3 + 100);
     glVertex2f(lrIndex3 + 26, car3 + 100 - 7);
-    glVertex2f(lrIndex3 + 28, car3 + 100 - 9);
+    glVertex2f(lrIndex3 + 27, car3 + 100 - 9);
+    glVertex2f(lrIndex3 + 29, car3 + 100 - 9);
     glVertex2f(lrIndex3 + 30, car3 + 100 - 7);
     glVertex2f(lrIndex3 + 30, car3 + 100);
     glEnd();
@@ -224,7 +227,7 @@ void draw_opp(){
         lrIndex3 = lrIndex;
     }
     // KIll check car3
-    if ((abs(lrIndex - lrIndex3) < 8) && (car3 + 100 < 10))
+    if ((abs(lrIndex - lrIndex3) < 6) && (car3 + 100 < 10))
     {
         start = 0;
         gv = 1;
@@ -244,20 +247,20 @@ void startGame(){
     glVertex2f(17,0);
     glVertex2f(0,0);
     glEnd();
+
     //Print Score
     char buffer [50];
     sprintf (buffer, "SCORE: %d", score);
     glColor3f(1.000, 1.000, 0.000);
-    // glColor3f(1.000, 0.692, 0.000);
     renderBitmapString(0, 16, (void *)GLUT_BITMAP_HELVETICA_18, buffer);
+
     //Speed Print
     char buffer1 [50];
     sprintf (buffer1, "SPEED:%dKm/h", FPS);
     glColor3f(1.000, 1.000, 0.000);
-    // glColor3f(0.000, 0.692, 0.000);
     renderBitmapString(0, 17-5, (void *)GLUT_BITMAP_HELVETICA_18, buffer1);
+
     //level Print
-    // level=1;
     if(score % 10 == 0){
         int last = score /10 +1;
         if(last!=level){
@@ -265,11 +268,12 @@ void startGame(){
             FPS=FPS+2;
         }
     }
+
     char level_buffer [50];
     sprintf (level_buffer, "LEVEL: %d", level);
     glColor3f(1.000, 1.000, 0.000);
-
     renderBitmapString(0, 17 - 9, (void *)GLUT_BITMAP_HELVETICA_18, level_buffer);
+
     //Increse Speed With level
 
     //MAIN car
@@ -396,7 +400,7 @@ void fristDesign(){
         if(gv==1){
             glColor3f(1.000, 0.000, 0.000);
             renderBitmapString(45,60+15,(void *)GLUT_BITMAP_TIMES_ROMAN_24,"GAME OVER");
-            glColor3f(1.000, 0.000, 0.000);
+            glColor3ub(191.0f, 66.0f, 37.0f);
             char buffer2 [50];
             sprintf (buffer2, "Your Score is : %d", score);
             if(score>high_score) high_score=score;
@@ -428,20 +432,22 @@ void fristDesign(){
         glColor3f(1.000, 1.000, 0.000);
         renderBitmapString(60 - 5, 50 - 49, (void *)GLUT_BITMAP_HELVETICA_18, "Shalini : 20074029");
 }
+
 void display(){
     glClear(GL_COLOR_BUFFER_BIT);
     if(start==1){
         // glClearColor(0.627, 0.322, 0.176,1);
-        glClearColor(0.000, 0.392, 0.000,1);
+        glClearColor(0.000, 0.692, 0.000,1);
         startGame();
     }
     else{
         fristDesign();
-        //glClearColor(0.184, 0.310, 0.310,1);
+        // glClearColor(0.184, 0.310, 0.310,1);
     }
     glFlush();
     glutSwapBuffers();
 }
+
 void spe_key(int key, int x, int y){
         switch (key) {
         case GLUT_KEY_DOWN:
@@ -471,6 +477,7 @@ void spe_key(int key, int x, int y){
                 break;
         }
 }
+
 void processKeys(unsigned char key, int x, int y) {
       switch (key)
             {
@@ -501,10 +508,12 @@ void processKeys(unsigned char key, int x, int y) {
                 break;
         }
 }
+
 void timer(int){
     glutPostRedisplay();
     glutTimerFunc(1000/FPS,timer,0);
 }
+
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);
