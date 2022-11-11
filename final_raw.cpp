@@ -7,25 +7,35 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <math.h>
 
-//Speed
-int FPS = 20;
+using namespace std;
+
+// Speed
+int speed = 50;
+
+// high score
 int high_score = 0;
-//Track
+
+// Track
 int start = 0;
 int gv = 0;
 int level = 1;
-//Score
+
+// Score
 int score = 0;
+
 // Form move track
 int roadDivTopMost = 0;
 int roadDivTop = 0;
 int roadDivMdl = 0;
 int roadDivBtm = 0;
+
 // For Car Left / RIGHT
 int lrIndex = 0;
+
 // Car Coming
 int car1 = 0;
 int lrIndex1 = 0;
@@ -61,14 +71,12 @@ void display()
     glClear(GL_COLOR_BUFFER_BIT);
     if (start == 1)
     {
-        // glClearColor(0.627, 0.322, 0.176,1);
         glClearColor(0.000, 0.692, 0.000, 1);
         startGame();
     }
     else
     {
-        fristDesign();
-        // glClearColor(0.184, 0.310, 0.310,1);
+        fristDesign(); 
     }
     glFlush();
     glutSwapBuffers();
@@ -76,6 +84,20 @@ void display()
 
 int main(int argc, char *argv[])
 {
+
+    fstream fin("hs.txt");
+
+    string hs="";
+
+    while (!fin.eof())
+    {
+        string text;
+        fin>>text;
+        hs+=text;
+    }
+    fin.close();
+    high_score=stoi(hs);
+    
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowSize(800, 600);
@@ -91,8 +113,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-
-//Main Functions
+// Main Functions
 
 void draw_game_road()
 {
@@ -331,7 +352,7 @@ void startGame()
 
     // Speed Print
     char buffer1[50];
-    sprintf(buffer1, "SPEED:%dKm/h", FPS);
+    sprintf(buffer1, "SPEED:%dKm/h", speed);
     glColor3f(1.000, 1.000, 0.000);
     renderBitmapString(0, 17 - 5, (void *)GLUT_BITMAP_HELVETICA_18, buffer1);
 
@@ -342,7 +363,7 @@ void startGame()
         if (last != level)
         {
             level = score / 10 + 1;
-            FPS = FPS + 2;
+            speed = speed + 2;
         }
     }
 
@@ -350,8 +371,6 @@ void startGame()
     sprintf(level_buffer, "LEVEL: %d", level);
     glColor3f(1.000, 1.000, 0.000);
     renderBitmapString(0, 17 - 9, (void *)GLUT_BITMAP_HELVETICA_18, level_buffer);
-
-    // Increse Speed With level
 
     // MAIN car
     draw_main_car();
@@ -371,20 +390,7 @@ void fristDesign()
     glVertex2f(100, 50 - 50);
     glVertex2f(0, 50 - 50);
     glEnd();
-    // Road Design In Front Page
-    // glColor3f(00, 0, 0);
-    // glBegin(GL_TRIANGLES);
-    // glVertex2f(32 - 2 + 21, 55);
-    // glVertex2f(32 + 58, 50 - 50);
-    // glVertex2f(32 - 22, 50 - 50);
-    // glEnd();
-    // // Road Middle
-    // glColor3f(1, 1, 1);
-    // glBegin(GL_TRIANGLES);
-    // glVertex2f(32 - 2 + 21, 55);
-    // glVertex2f(50 + 2, 50 - 50);
-    // glVertex2f(50 - 2, 50 - 50);
-    // glEnd();
+
     glColor3f(00, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(0, 55);
@@ -393,7 +399,7 @@ void fristDesign()
     glVertex2f(0, 40);
     glEnd();
 
-    // road mid line
+    // road mid tmp_h
 
     glColor3f(1, 1, 1);
     glBegin(GL_POLYGON);
@@ -415,8 +421,8 @@ void fristDesign()
     glVertex2f(86, 52 + 1);
     glVertex2f(90, 48 + 1);
     glVertex2f(90, 43 + 1);
-
     glEnd();
+
     // tireee
     glColor3ub(41.0f, 41.0f, 41.0f);
     glBegin(GL_POLYGON);
@@ -440,7 +446,6 @@ void fristDesign()
     glBegin(GL_POLYGON);
     glVertex2f(100, 100);
     glVertex2f(0, 100);
-    // glColor3f(0.686, 0.933, 0.933);
     glVertex2f(0, 55);
     glVertex2f(100, 55);
     glEnd();
@@ -480,6 +485,7 @@ void fristDesign()
     // Sun in
     glColor3ub(252.0f, 236.0f, 3.0f);
     sun(5);
+
     // Text Information in Frist Page
     if (gv == 1)
     {
@@ -488,18 +494,18 @@ void fristDesign()
         glColor3ub(191.0f, 66.0f, 37.0f);
         char buffer2[50];
         sprintf(buffer2, "Your Score is : %d", score);
-        if (score > high_score)
+        if (score > high_score){
             high_score = score;
+            fstream fin("hs.txt", ios::trunc | ios::out);
+            string sc=to_string(high_score);
+            fin<<sc;
+        }
         renderBitmapString(38 - 5, 60 - 4 + 15, (void *)GLUT_BITMAP_HELVETICA_18, buffer2);
         char buffer3[50];
         sprintf(buffer3, "High Score : %d", high_score);
         renderBitmapString(38 + 20, 60 - 4 + 15, (void *)GLUT_BITMAP_HELVETICA_18, buffer3);
     }
-    // glColor3f(0.000, 0.000, 0.000);
-    // renderBitmapString(30,80,(void *)GLUT_BITMAP_TIMES_ROMAN_24,"2D Car Racing Game ");
-    // glColor3f(0.000, 1.000, 0.000);
-    // renderBitmapString(2,5+1.5+10,(void *)GLUT_BITMAP_HELVETICA_12,"Help:");
-    // renderBitmapString(2,5+1.49+10,(void *)GLUT_BITMAP_HELVETICA_18,"__");
+
     glColor3f(0.200, 1.000, 0.900);
     renderBitmapString(2, 3 + 2.5 + 10, (void *)GLUT_BITMAP_HELVETICA_18, "Press ANY KEY to START New Game");
     glColor3f(1.000, 1.000, 1.000);
@@ -508,10 +514,7 @@ void fristDesign()
     renderBitmapString(2, 4 - 5 + 10, (void *)GLUT_BITMAP_8_BY_13, "DOWN : Decrease Speed");
     renderBitmapString(2, 4 - 7 + 10, (void *)GLUT_BITMAP_8_BY_13, "RIGHT: Turn Right");
     renderBitmapString(2, 4 - 9 + 10, (void *)GLUT_BITMAP_8_BY_13, "LEFT : Turn Left");
-    // renderBitmapString(2,4-3+10,(void *)GLUT_BITMAP_8_BY_13,"Press UP Arrow Button to increase Speed");
-    // renderBitmapString(2,4-5+10,(void *)GLUT_BITMAP_8_BY_13,"Press DWON Arrow Button to decrease Speed");
-    // renderBitmapString(2,4-7+10,(void *)GLUT_BITMAP_8_BY_13,"Press RIGHT Arrow Button to turn Right");
-    // renderBitmapString(2,4-9+10,(void *)GLUT_BITMAP_8_BY_13,"Press LEFT Arrow Button to turn Left");
+
     glColor3f(1.000, 0.000, 0.000);
     renderBitmapString(2, 3 - 11 + 10, (void *)GLUT_BITMAP_HELVETICA_18, "Press ESC to Exit");
     glColor3f(1.000, 1.000, 1.000);
@@ -536,8 +539,6 @@ void fristDesign()
     glVertex3f(1.0f, 0.0f, 0.0f);  // Bottom Right
     glColor3f(0.0f, 0.0f, 1.0f);   // Set The Color To Blue
     glVertex3f(-1.0f, 0.0f, 0.0f); // Bottom Left
-
-    // glVertex3f();
     glEnd();
 }
 
@@ -546,16 +547,16 @@ void spe_key(int key, int x, int y)
     switch (key)
     {
     case GLUT_KEY_DOWN:
-        if (FPS > (50 + (level * 2)))
-            FPS = FPS - 2;
+        if (speed > (50 + (level * 2)))
+            speed = speed - 2;
         break;
     case GLUT_KEY_UP:
-        FPS = FPS + 2;
+        speed = speed + 2;
         break;
     case GLUT_KEY_LEFT:
         if (lrIndex >= 0)
         {
-            lrIndex = lrIndex - (FPS / 10);
+            lrIndex = lrIndex - (speed / 10);
             if (lrIndex < 0)
             {
                 lrIndex = -1;
@@ -565,7 +566,7 @@ void spe_key(int key, int x, int y)
     case GLUT_KEY_RIGHT:
         if (lrIndex <= 44)
         {
-            lrIndex = lrIndex + (FPS / 10);
+            lrIndex = lrIndex + (speed / 10);
             if (lrIndex > 44)
             {
                 lrIndex = 45;
@@ -590,7 +591,7 @@ void processKeys(unsigned char key, int x, int y)
         {
             start = 1;
             gv = 0;
-            FPS = 50;
+            speed = 50;
             roadDivTopMost = 0;
             roadDivTop = 0;
             roadDivMdl = 0;
@@ -615,5 +616,5 @@ void processKeys(unsigned char key, int x, int y)
 void timer(int)
 {
     glutPostRedisplay();
-    glutTimerFunc(1000 / FPS, timer, 0);
+    glutTimerFunc(1000 / speed, timer, 0);
 }
