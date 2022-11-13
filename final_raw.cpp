@@ -14,18 +14,18 @@
 using namespace std;
 
 // Speed
-int speed = 50;
+int speed_of_car = 50;
 
-// high score
-int high_score = 0;
+// Score
+int player_score = 0;
 
 // Track
 int start = 0;
-int gv = 0;
-int level = 1;
+int game_over = 0;
+int cur_level = 1;
 
-// Score
-int score = 0;
+// high player_score
+int high_score = 0;
 
 // Form move track
 int roadDivTopMost = 0;
@@ -54,7 +54,6 @@ void renderBitmapString(float x, float y, void *font, const char *string)
         glutBitmapCharacter(font, *c);
     }
 }
-
 void draw_game_road();
 void draw_main_car();
 void draw_opp();
@@ -65,7 +64,6 @@ void fristDesign();
 void spe_key(int key, int x, int y);
 void processKeys(unsigned char key, int x, int y);
 void timer(int);
-
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -101,7 +99,7 @@ int main(int argc, char *argv[])
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowSize(800, 600);
-    glutInitWindowPosition(200, 20);
+    glutInitWindowPosition(560, 240);
     glutCreateWindow("Car Racing Game");
     glutDisplayFunc(display);
     glutSpecialFunc(spe_key);
@@ -139,7 +137,7 @@ void draw_game_road()
     if (roadDivTop < -100)
     {
         roadDivTop = 20;
-        score++;
+        player_score++;
     }
     // Midle
     glColor3f(1.000, 1.000, 1.000);
@@ -153,7 +151,7 @@ void draw_game_road()
     if (roadDivMdl < -60)
     {
         roadDivMdl = 60;
-        score++;
+        player_score++;
     }
     // Bottom
     glColor3f(1.000, 1.000, 1.000);
@@ -167,7 +165,7 @@ void draw_game_road()
     if (roadDivBtm < -20)
     {
         roadDivBtm = 100;
-        score++;
+        player_score++;
     }
 }
 
@@ -233,7 +231,7 @@ void draw_opp()
     if ((abs(lrIndex - lrIndex1) < 6) && (car1 + 100 < 10))
     {
         start = 0;
-        gv = 1;
+        game_over = 1;
     }
     // Opposite car 2
     glColor3f(0.000, 0.000, 0.000);
@@ -269,7 +267,7 @@ void draw_opp()
     if ((abs(lrIndex - lrIndex2) < 6) && (car2 + 100 < 10))
     {
         start = 0;
-        gv = 1;
+        game_over = 1;
     }
     // Opposite car 3
     glColor3f(0.000, 0.000, 0.000);
@@ -305,7 +303,7 @@ void draw_opp()
     if ((abs(lrIndex - lrIndex3) < 6) && (car3 + 100 < 10))
     {
         start = 0;
-        gv = 1;
+        game_over = 1;
     }
 }
 
@@ -346,29 +344,29 @@ void startGame()
 
     // Print Score
     char buffer[50];
-    sprintf(buffer, "SCORE: %d", score);
+    sprintf(buffer, "SCORE: %d", player_score);
     glColor3f(1.000, 1.000, 0.000);
     renderBitmapString(0, 16, (void *)GLUT_BITMAP_HELVETICA_18, buffer);
 
     // Speed Print
     char buffer1[50];
-    sprintf(buffer1, "SPEED:%dKm/h", speed);
+    sprintf(buffer1, "SPEED:%dKm/h", speed_of_car);
     glColor3f(1.000, 1.000, 0.000);
     renderBitmapString(0, 17 - 5, (void *)GLUT_BITMAP_HELVETICA_18, buffer1);
 
-    // level Print
-    if (score % 10 == 0)
+    // cur_level Print
+    if (player_score % 10 == 0)
     {
-        int last = score / 10 + 1;
-        if (last != level)
+        int last = player_score / 10 + 1;
+        if (last != cur_level)
         {
-            level = score / 10 + 1;
-            speed = speed + 2;
+            cur_level = player_score / 10 + 1;
+            speed_of_car = speed_of_car + 5;
         }
     }
 
     char level_buffer[50];
-    sprintf(level_buffer, "LEVEL: %d", level);
+    sprintf(level_buffer, "LEVEL: %d", cur_level);
     glColor3f(1.000, 1.000, 0.000);
     renderBitmapString(0, 17 - 9, (void *)GLUT_BITMAP_HELVETICA_18, level_buffer);
 
@@ -487,15 +485,15 @@ void fristDesign()
     sun(5);
 
     // Text Information in Frist Page
-    if (gv == 1)
+    if (game_over == 1)
     {
         glColor3f(1.000, 0.000, 0.000);
         renderBitmapString(45, 60 + 15, (void *)GLUT_BITMAP_TIMES_ROMAN_24, "GAME OVER");
         glColor3ub(191.0f, 66.0f, 37.0f);
         char buffer2[50];
-        sprintf(buffer2, "Your Score is : %d", score);
-        if (score > high_score){
-            high_score = score;
+        sprintf(buffer2, "Your Score is : %d", player_score);
+        if (player_score > high_score){
+            high_score = player_score;
             fstream fin("hs.txt", ios::trunc | ios::out);
             string sc=to_string(high_score);
             fin<<sc;
@@ -547,16 +545,16 @@ void spe_key(int key, int x, int y)
     switch (key)
     {
     case GLUT_KEY_DOWN:
-        if (speed > (50 + (level * 2)))
-            speed = speed - 2;
+        if (speed_of_car > (50 + (cur_level * 2)))
+            speed_of_car = speed_of_car - 2;
         break;
     case GLUT_KEY_UP:
-        speed = speed + 2;
+        speed_of_car = speed_of_car + 2;
         break;
     case GLUT_KEY_LEFT:
         if (lrIndex >= 0)
         {
-            lrIndex = lrIndex - (speed / 10);
+            lrIndex = lrIndex - (speed_of_car / 10);
             if (lrIndex < 0)
             {
                 lrIndex = -1;
@@ -566,7 +564,7 @@ void spe_key(int key, int x, int y)
     case GLUT_KEY_RIGHT:
         if (lrIndex <= 44)
         {
-            lrIndex = lrIndex + (speed / 10);
+            lrIndex = lrIndex + (speed_of_car / 10);
             if (lrIndex > 44)
             {
                 lrIndex = 45;
@@ -590,8 +588,8 @@ void processKeys(unsigned char key, int x, int y)
         if (start == 0)
         {
             start = 1;
-            gv = 0;
-            speed = 50;
+            game_over = 0;
+            speed_of_car = 50;
             roadDivTopMost = 0;
             roadDivTop = 0;
             roadDivMdl = 0;
@@ -603,8 +601,8 @@ void processKeys(unsigned char key, int x, int y)
             lrIndex2 = 0;
             car3 = +70;
             lrIndex3 = 0;
-            score = 0;
-            level = 0;
+            player_score = 0;
+            cur_level = 0;
         }
         break;
 
@@ -616,5 +614,5 @@ void processKeys(unsigned char key, int x, int y)
 void timer(int)
 {
     glutPostRedisplay();
-    glutTimerFunc(1000 / speed, timer, 0);
+    glutTimerFunc(1000 / speed_of_car, timer, 0);
 }
