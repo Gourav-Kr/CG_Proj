@@ -83,6 +83,7 @@ void display()
 int main(int argc, char *argv[])
 {
 
+    // Inside Main To Retrieve High Score 
     fstream fin("hs.txt");
 
     string hs="";
@@ -492,6 +493,7 @@ void fristDesign()
         glColor3ub(191.0f, 66.0f, 37.0f);
         char buffer2[50];
         sprintf(buffer2, "Your Score is : %d", player_score);
+        // If score is more then high score then update the high score
         if (player_score > high_score){
             high_score = player_score;
             fstream fin("hs.txt", ios::trunc | ios::out);
